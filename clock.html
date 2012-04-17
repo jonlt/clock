@@ -1,21 +1,17 @@
 ﻿<html>
 	<head>
 		<style type="text/css">
-			body {
+			#clock {
 				font-family: courier, monospace;
-				color:#111;
-				background-color:#000;
-				font-size: xx-large;
+				color:#ccc;
+				background-color:#fff;
 				margin-top:4em;
-			}
-			.active {
-				color:#eee;
 			}
 		</style>
 	</head>
 	<body>
 	<div id="clock" align="center">
-		<div><span id="its" class="active">IT'S</span>O<span id="t10">TEN</span><span id="a">A</span><span id="t30">HALF</span></div>
+		<div><span id="its" style="color:#000">IT'S</span>O<span id="t10">TEN</span><span id="a">A</span><span id="t30">HALF</span></div>
 		<div><span id="t20">TWENTY</span><span id="t15">QUARTER</span></div>
 		<div>A<span id="t5">FIVE</span>R<span id="mins">MINUTES</span></div>
 		<div><span id="past">PAST</span><span id="to">TO</span>Z<span id="1">ONE</span><span id="2">TWO</span></div>
@@ -32,7 +28,7 @@
 		var update = function(){
 			var active = [];
 			for(var i = 1; i < spans.length; i++){
-				spans[i].style.color = "#111";
+				spans[i].style.color = "#ccc";
 			}
 			
 			var date = new Date();
@@ -88,7 +84,7 @@
 			}
 			
 			for(var i = 0; i < active.length; i++){
-				document.getElementById(active[i]).style.color = "#eee";
+				document.getElementById(active[i]).style.color = "#000";
 			}
 			console.log("totot");
 		}
