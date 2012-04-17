@@ -1,0 +1,100 @@
+﻿<html>
+	<head>
+		<style type="text/css">
+			body {
+				font-family: courier, monospace;
+				color:#111;
+				background-color:#000;
+				font-size: xx-large;
+				margin-top:4em;
+			}
+			.active {
+				color:#eee;
+			}
+		</style>
+	</head>
+	<body>
+	<div id="clock" align="center">
+		<div><span id="its" class="active">IT'S</span>O<span id="t10">TEN</span><span id="a">A</span><span id="t30">HALF</span></div>
+		<div><span id="t20">TWENTY</span><span id="t15">QUARTER</span></div>
+		<div>A<span id="t5">FIVE</span>R<span id="mins">MINUTES</span></div>
+		<div><span id="past">PAST</span><span id="to">TO</span>Z<span id="1">ONE</span><span id="2">TWO</span></div>
+		<div><span id="3">THREE</span><span id="4">FOUR</span><span id="5">FIVE</span></div>
+		<div><span id="6">SIX</span><span id="7">SEVEN</span><span id="8">EIGHT</span></div>
+		<div><span id="9">NINE</span><span id="10">TEN</span><span id="11">ELEVEN</span></div>
+		<div><span id="12">TWELVE</span><span id="oclock">O'CLOCK</span></div>
+	</div>
+	</body>
+	
+	<script type="text/javascript">
+		var spans = document.getElementsByTagName("span");
+		
+		var update = function(){
+			var active = [];
+			for(var i = 1; i < spans.length; i++){
+				spans[i].style.color = "#111";
+			}
+			
+			var date = new Date();
+			
+			var mins = date.getMinutes();
+			var to_past;
+
+			var hour = date.getHours();
+			if(hour > 12) hour = hour - 12;
+			if(hour == 0) hour = 12;
+			
+			if(mins > 30){
+				mins = 60 - mins;
+				to_past = "to";
+				hour +=1;
+			} else {
+				to_past = "past";
+			}
+			
+			
+			var toPush;
+			if(mins < 3){
+				active.push("oclock");
+			} else if(mins < 7){
+				active.push("t5");
+				active.push("mins");
+			} else if(mins < 13){
+				active.push("t10");
+				active.push("mins");
+			} else if(mins < 17){
+				active.push("t15");
+				active.push("a");
+			} else if(mins < 23){
+				active.push("t20");
+				active.push("mins");
+			} else if(mins < 27){
+				active.push("t20");
+				active.push("t5");
+				active.push("mins");
+			} else if(mins <= 30){
+				active.push("t30");
+				if(to_past == "to"){
+					to_past = "past";
+					hour -=1;
+				}
+				
+			}
+
+			active.push(""+hour)
+			
+			if(mins > 3){
+				active.push(to_past);
+			}
+			
+			for(var i = 0; i < active.length; i++){
+				document.getElementById(active[i]).style.color = "#eee";
+			}
+			console.log("totot");
+		}
+		update();
+		setInterval(update, 60000);
+		
+	</script>
+	
+</html>
